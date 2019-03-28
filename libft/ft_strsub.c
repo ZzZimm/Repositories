@@ -4,7 +4,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	char *sub;
 
-	if(!(sub = ft_strnew(len)))
+	if(!s || !(sub = ft_strnew(len)))
 		return (NULL);
 	sub = ft_strncpy(sub, s + start, len);
 	return (sub);

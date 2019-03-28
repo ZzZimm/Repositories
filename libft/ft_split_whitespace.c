@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int		count_words(char *str)
+static int		count_words(char *str)
 {
 	while ((*str >= 9 && *str <= 13) || *str == ' ')
 		str++;
@@ -9,7 +9,7 @@ int		count_words(char *str)
 	return *str ? 1 + count_words(str) : *(str - 1) > 32 ? 1: 0;
 }
 
-int		*word_beg(char *str)
+static int		*word_beg(char *str)
 {
 	int *arr;
 	int i;
@@ -31,7 +31,7 @@ int		*word_beg(char *str)
 	return (arr);
 }
 
-int		*word_end(char *str)
+static int		*word_end(char *str)
 {
 	int *arr;
 	int i;

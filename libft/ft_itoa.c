@@ -1,6 +1,6 @@
 #include "libft.h"
 
-long	ft_intlen(long n)
+static long	ft_intlen(long n)
 {
 	int count;
 
@@ -20,7 +20,7 @@ long	ft_intlen(long n)
 	return (count);
 }
 
-char	*ft_itoa(int n) 
+char		*ft_itoa(int n) 
 {
 	char *str;
 	long i[2];

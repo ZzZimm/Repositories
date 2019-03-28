@@ -1,7 +1,9 @@
 #include "libft.h"
 
-int		count_words_c(char *str, char c)
+static int		count_words_c(char *str, char c)
 {
+	if(!*str)
+		return (0);
 	while (*str == c)
 		str++;
 	while (*str && *str != c)
@@ -9,7 +11,7 @@ int		count_words_c(char *str, char c)
 	return *str ? 1 + count_words_c(str, c) : *(str - 1) != c ? 1: 0;
 }
 
-int		*word_beg_c(char *str, char c)
+static int		*word_beg_c(char *str, char c)
 {
 	int *arr;
 	int i;
@@ -31,7 +33,7 @@ int		*word_beg_c(char *str, char c)
 	return (arr);
 }
 
-int		*word_end_c(char *str, char c)
+static int		*word_end_c(char *str, char c)
 {
 	int *arr;
 	int i;
@@ -67,10 +69,11 @@ char	**ft_strsplit(char *str, char c)
 	int j;
 
 	j = -1;
+	if (!str || 
+		!(tab = (char **)malloc(sizeof(char *) * (count_words_c(str, c) + 1))))
+		return (NULL);
 	beg = word_beg_c(str, c);
 	end = word_end_c(str, c);
-	if (!(tab = (char **)malloc(sizeof(char *) * (count_words_c(str, c) + 1))))
-		return (NULL);
 	while (++j < count_words_c(str, c))
 	{
 		i = -1;

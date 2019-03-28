@@ -7,6 +7,8 @@ char	*ft_strtrim(char const *s)
 	size_t len;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	while ((*s >= 9 && *s <= 17) || *s == ' ')
 		s++;
 	len = ft_strlen((char *)s);
