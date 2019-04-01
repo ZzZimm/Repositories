@@ -1,15 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split_whitespace.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/01 14:21:59 by lzimmerm          #+#    #+#             */
+/*   Updated: 2019/04/01 14:28:40 by lzimmerm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static int		count_words(char *str)
+static int		count_words(const char *str)
 {
 	while ((*str >= 9 && *str <= 13) || *str == ' ')
 		str++;
 	while (*str > 32)
 		str++;
-	return *str ? 1 + count_words(str) : *(str - 1) > 32 ? 1: 0;
+	if (*str)
+		return (1 + count_words(str));
+	return (*(str - 1) > 32 ? 1 : 0);
 }
 
-static int		*word_beg(char *str)
+static int		*word_beg(const char *str)
 {
 	int *arr;
 	int i;
@@ -31,7 +45,7 @@ static int		*word_beg(char *str)
 	return (arr);
 }
 
-static int		*word_end(char *str)
+static int		*word_end(const char *str)
 {
 	int *arr;
 	int i;
@@ -56,13 +70,13 @@ static int		*word_end(char *str)
 	return (arr);
 }
 
-char	**ft_split_whitespace(char *str)
+char			**ft_split_whitespace(const char *str)
 {
-	char **tab;
-	int *beg;
-	int *end;
-	int i;
-	int j;
+	char	**tab;
+	int		*beg;
+	int		*end;
+	int		i;
+	int		j;
 
 	j = -1;
 	beg = word_beg(str);

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/01 14:30:38 by lzimmerm          #+#    #+#             */
+/*   Updated: 2019/04/01 14:30:55 by lzimmerm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char	*ft_strchr (const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	while (*s || c == '\0')
 	{
@@ -8,5 +20,5 @@ char	*ft_strchr (const char *s, int c)
 			return ((char *)s);
 		s++;
 	}
-	return  NULL;
+	return (NULL);
 }

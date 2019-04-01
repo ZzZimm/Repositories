@@ -8,7 +8,9 @@ static int		count_words_c(char const *str, char c)
 		str++;
 	while (*str && *str != c)
 		str++;
-	return *str ? 1 + count_words_c(str, c) : *(str - 1) != c ? 1: 0;
+	if (*str)
+		return (1 + count_words_c(str, c))
+	return (*(str - 1) != c ? 1 : 0);
 }
 
 static int		*word_beg_c(char const *str, char c)
