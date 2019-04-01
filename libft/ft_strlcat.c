@@ -6,7 +6,7 @@
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 14:37:38 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/01 14:37:40 by lzimmerm         ###   ########.fr       */
+/*   Updated: 2019/04/01 15:20:23 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 size_t	ft_strlcat(char *s1, const char *s2, size_t dstsize)
 {
 	size_t i[3];
-	
+
 	i[0] = -1;
 	i[1] = 0;
 	i[2] = ft_strlen(s1);

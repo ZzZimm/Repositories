@@ -6,7 +6,7 @@
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 14:20:08 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/01 14:20:31 by lzimmerm         ###   ########.fr       */
+/*   Updated: 2019/04/01 15:17:18 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	ft_putnbr_fd(int n, int fd)
 	while (ft_pow(10, (i[0] + 1)) <= i[1])
 		i[0]++;
 	while (i[0])
-		ft_putchar_fd('0' + i[1]  / ft_pow(10, i[0]--) % 10, fd);
+		ft_putchar_fd('0' + i[1] / ft_pow(10, i[0]--) % 10, fd);
 }

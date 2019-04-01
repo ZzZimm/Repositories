@@ -6,13 +6,13 @@
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 14:33:49 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/01 14:34:09 by lzimmerm         ###   ########.fr       */
+/*   Updated: 2019/04/01 15:18:18 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strdup(char *src)
+char	*ft_strdup(char *src)
 {
 	char	*dest;
 	int		i;
@@ -23,5 +23,5 @@ char *ft_strdup(char *src)
 	while (src[++i])
 		dest[i] = src[i];
 	dest[i] = '\0';
-	return(dest);
+	return (dest);
 }

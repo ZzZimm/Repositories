@@ -6,7 +6,7 @@
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 14:35:22 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/01 14:35:27 by lzimmerm         ###   ########.fr       */
+/*   Updated: 2019/04/01 15:18:37 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ int		ft_strequ(char const *s1, char const *s2)
 {
 	if (!s1 || !s2)
 		return (0);
-	return !ft_strcmp(s1, s2) ? 1 : 0;
+	return (!ft_strcmp(s1, s2) ? 1 : 0);
 }

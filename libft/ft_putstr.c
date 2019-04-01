@@ -6,7 +6,7 @@
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 14:20:36 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/01 14:20:47 by lzimmerm         ###   ########.fr       */
+/*   Updated: 2019/04/01 15:17:53 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_putstr(char *str)
 {
-		write(1, str, ft_strlen(str));
+	write(1, str, ft_strlen(str));
 }
