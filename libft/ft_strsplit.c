@@ -6,7 +6,7 @@
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:09:07 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/01 15:09:56 by lzimmerm         ###   ########.fr       */
+/*   Updated: 2019/04/01 15:37:30 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static int		count_words_c(char const *str, char c)
 {
-	if(!*str)
+	if (!*str)
 		return (0);
 	while (*str == c)
 		str++;
 	while (*str && *str != c)
 		str++;
 	if (*str)
-		return (1 + count_words_c(str, c))
+		return (1 + count_words_c(str, c));
 	return (*(str - 1) != c ? 1 : 0);
 }
 
@@ -74,16 +74,16 @@ static int		*word_end_c(char const *str, char c)
 	return (arr);
 }
 
-char	**ft_strsplit(char const *str, char c)
+char			**ft_strsplit(char const *str, char c)
 {
-	char **tab;
-	int *beg;
-	int *end;
-	int i;
-	int j;
+	char	**tab;
+	int		*beg;
+	int		*end;
+	int		i;
+	int		j;
 
 	j = -1;
-	if (!str || 
+	if (!str ||
 		!(tab = (char **)malloc(sizeof(char *) * (count_words_c(str, c) + 1))))
 		return (NULL);
 	beg = word_beg_c(str, c);
