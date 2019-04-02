@@ -41,7 +41,6 @@ static void ft_fill(int fd, t_list **lst)
 	}
 	(*lst)->content_tab = ft_strsplit((*lst)->content, '\n');
 	(*lst)->n_lines = count_words_c((*lst)->content,'\n');
-	free((*lst)->content);
 }
 
 int		fd_match(int fd, t_list **lst, char **line)
@@ -75,6 +74,8 @@ int		get_next_line(int const fd, char **line)
 
 	if (!line || fd < 0 || read(fd, NULL, 0) == -1)
 		return (-1);
+	if (read(fd, NULL, 0) == 0)
+		return (0);
 	if (!&(lst->content))
 	{
 		if (!(lst = (t_list *)malloc(sizeof(t_list))))
@@ -107,4 +108,70 @@ int		get_next_line(int const fd, char **line)
 	lst->line_number += 1;
 
 	return (1);
+}
+
+
+int main (int ac, char **av)
+{
+	int fd1;
+	int fd2;
+	int fd3;
+	char *output;
+	int rd;
+
+	if (ac >= 2)
+	{
+		fd1 = open(av[1], O_RDONLY);
+		fd2 = open(av[2], O_RDONLY);
+		fd3 = open(av[3], O_RDONLY);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd2, &output);
+		printf("fd2 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd3, &output);
+		printf("fd3 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd2, &output);
+		printf("fd2 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd3, &output);
+		printf("fd3 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd2, &output);
+		printf("fd2 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd3, &output);
+		printf("fd3 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd2, &output);
+		printf("fd2 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd3, &output);
+		printf("fd3 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd2, &output);
+		printf("fd2 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd3, &output);
+		printf("fd3 %s\n", output);
+		printf("ret = %d\n", rd);
+		close(fd1);
+		close(fd2);
+		close(fd3);
+	}
+	return (0);
 }

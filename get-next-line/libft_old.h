@@ -8,8 +8,9 @@
 typedef struct	s_list
 {
 	char		*content;
+	char		**content_tab;
+	int			n_lines;
 	size_t		content_size;
-	int			pos;
 	int			fd;
 	int			line_number;
 	struct		s_list	*next;
