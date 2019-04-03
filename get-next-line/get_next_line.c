@@ -6,7 +6,7 @@
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:57:13 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/03 19:39:33 by lzimmerm         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:17:58 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static t_list	*ft_lstinit(int fd)
 
 	if (!(lst = (t_list *)malloc(sizeof(t_list))))
 		return (0);
-	lst->content = ft_strnew(BUFF_SIZE + 1);
-	lst->line_number = 0;
+	lst->content = ft_strnew(1); // modifie
 	lst->content_size = 0;
 	lst->next = NULL;
 	lst->fd = fd;
@@ -69,13 +68,13 @@ static void return_line(int pos, t_list **lst, char **line)
 {
 	char *tmp;
 
-	printf("in lst_read : found \'\\n\' at pos %d \n", pos);
+//	printf("in lst_read : found \'\\n\' at pos %d \n", pos);
 	*line = ft_strtrimc(ft_strdup((*lst)->content), '\n'); 
 	tmp = ft_strsub((*lst)->content, pos + 1, (*lst)->content_size - (pos + 1));
 	free((*lst)->content);
 	(*lst)->content = tmp; 
 	(*lst)->content_size = (*lst)->content_size - (pos + 1);
-	printf("lst->content = %s, lst->content_size = %lu \n", (*lst)->content, (*lst)->content_size);
+//	printf("lst->content = %s, lst->content_size = %lu \n", (*lst)->content, (*lst)->content_size);
 }
 
 static void	ft_lstread(int fd, t_list **lst, char **line)
@@ -86,7 +85,7 @@ static void	ft_lstread(int fd, t_list **lst, char **line)
 	unsigned int pos;
 
 	
-	printf("__________________ lst_read_______________\n");
+//	printf("__________________ lst_read_______________\n");
 	if ((pos = ft_strposchr((*lst)->content, '\n'))> 0)
 	{
 		return_line(pos, lst, line);
@@ -100,16 +99,16 @@ static void	ft_lstread(int fd, t_list **lst, char **line)
 		(*lst)->content = tmp;
 		(*lst)->content_size = (*lst)->content_size + rd;
 		(*lst)->content[(*lst)->content_size] = '\0';
-		printf("end of first step of read, content = %s\n", (*lst)->content);
-		printf("%d\n",(pos =  ft_strposchr((*lst)->content, '\n')));
+//		printf("end of first step of read, content = %s\n", (*lst)->content);
+//		printf("%d\n",(pos =  ft_strposchr((*lst)->content, '\n')));
 		if ((pos = ft_strposchr((*lst)->content, '\n'))> 0)
 		{
 			return_line(pos, lst, line);
 			return ;
 		} 
 	}
-	printf("\n_______________LOOOOOK ME HERE______________\n");
-	printf("lst->content = %s\n", (*lst)->content);
+//	printf("\n_______________LOOOOOK ME HERE______________\n");
+//	printf("lst->content = %s\n", (*lst)->content);
 	*line = ft_strnew(1);
 	(*lst)->content_size = 0;
 }
@@ -134,37 +133,182 @@ int		get_next_line(int fd, char **line)
 	static t_list *lst;
 	t_list *curr;
 
-	printf("fd = %d\n", fd);
+//	printf("fd = %d\n", fd);
 	if (!line || fd < 0 || read(fd, NULL, 0) == -1)
 		return (-1);
 	if(!&(lst->content))
 	{
 		lst = ft_lstinit(fd);
-	printf("__________________ lst_init ______________\n");
+//	printf("__________________ lst_init ______________\n");
 		ft_lstread(fd, &lst, line);
-	printf("LINE = %s\n", *line);
+//	printf("LINE = %s\n", *line);
 		return (ft_strlen(*line) > 0 ? 1 : 0);
 	}
 	if (lst->fd != fd)
 	{
 		curr = lst->next;
-		printf("\n\nCURR NEXT \n\n");
+//		printf("\n\nCURR NEXT \n\n");
 		while (curr)
 		{
 			if (curr->fd == fd)
 			{
 				ft_lstread(fd, &curr, line);
-		printf("LINE = %s\n", *line);
+//		printf("LINE = %s\n", *line);
 		return (ft_strlen(*line) > 0 ? 1 : 0);
 			}
 			curr = curr->next;
 		}
 		ft_push_new_lst(fd, &lst);
 		ft_lstread(fd, &lst, line);
-		printf("LINE = %s\n", *line);
+//		printf("LINE = %s\n", *line);
 		return (ft_strlen(*line) > 0 ? 1 : 0);
 	}
 	ft_lstread(fd, &lst, line);
-	printf("LINE = %s\n", *line);
+//	printf("LINE = %s\n", *line);
 	return (ft_strlen(*line) > 0 ? 1 : 0);
+}
+
+
+int main (int ac, char **av)
+{
+	int fd1;
+//	int fd2;
+//	int fd3;
+	char *output;
+//	int rd;
+
+	if (ac == 1)
+		return (1);
+	fd1 = open(av[1], O_RDONLY);
+	output = NULL;
+	while (get_next_line(fd1, &output) == 1)
+	{
+		printf("line : [%s]\n", output);
+		free(output);
+	}
+/*
+	if (ac >= 2)
+	{
+		fd1 = open(av[1], O_RDONLY);
+		fd2 = open(av[2], O_RDONLY);
+		fd3 = open(av[3], O_RDONLY);
+		rd = get_next_line(fd2, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+		rd = get_next_line(fd2, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+		rd = get_next_line(fd2, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+		rd = get_next_line(fd3, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+		rd = get_next_line(fd3, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+		rd = get_next_line(fd3, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+		rd = get_next_line(fd3, &output);
+		printf("fd1 %s\n", output);
+		free(output);
+//		printf("FIRST LEAK CHECK \n");
+		rd = get_next_line(fd1, &output);
+		free(output);
+//		printf("SECOND LEAK CHECK \n");
+		rd = get_next_line(fd1, &output);
+		free(output);*/
+/*		rd = get_next_line(fd2, &output);
+		free(output);
+		rd = get_next_line(fd3, &output);
+		free(output);
+		rd = get_next_line(fd1, &output);
+		free(output);
+		rd = get_next_line(fd2, &output);
+		free(output);
+		rd = get_next_line(fd3, &output);
+		free(output);
+		rd = get_next_line(fd1, &output);
+		free(output);
+		rd = get_next_line(fd2, &output);
+		free(output);
+		rd = get_next_line(fd3, &output);
+		free(output);
+		rd = get_next_line(fd1, &output);
+		free(output);
+		rd = get_next_line(fd2, &output);
+		free(output);
+		rd = get_next_line(fd3, &output);
+		free(output);
+		while ((rd = get_next_line(fd1, &output)))
+		{
+			if (rd <= 0)
+				break ;
+			printf("%s\n", output);
+		}
+		rd = get_next_line(fd2, &output);
+*/
+/*		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd2, &output);
+		printf("fd2 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd3, &output);
+		printf("fd3 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd2, &output);
+		printf("fd2 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd3, &output);
+		printf("fd3 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd2, &output);
+		printf("fd2 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd3, &output);
+		printf("fd3 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd2, &output);
+		printf("fd2 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd3, &output);
+		printf("fd3 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd1, &output);
+		printf("fd1 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd2, &output);
+		printf("fd2 %s\n", output);
+		printf("ret = %d\n", rd);
+		rd = get_next_line(fd3, &output);
+		printf("fd3 %s\n", output);
+		printf("ret = %d\n", rd);*/
+//		close(fd1);
+//		close(fd2);
+//		close(fd3);
+//	}
+	return (0);
 }
