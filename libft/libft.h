@@ -6,7 +6,7 @@
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:27:20 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/04 18:46:14 by lzimmerm         ###   ########.fr       */
+/*   Updated: 2019/04/04 18:50:56 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_lise_size(t_list *lst);
 int					ft_strstrlen(int nb_str, char **tab);
-int					count_words_c(char const *str, char c);
+int					ft_count_words_c(char const *str, char c);
 
 #endif
