@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pow.c                                           :+:      :+:    :+:   */
+/*   ft_strstrlen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 18:24:23 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/04 18:44:10 by lzimmerm         ###   ########.fr       */
+/*   Created: 2019/04/04 18:37:43 by lzimmerm          #+#    #+#             */
+/*   Updated: 2019/04/04 18:45:20 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_pow(int nb, int p)
+int		ft_strstrlen(int nb_str, char **tab)
 {
-	if (p < 0)
-		return (0);
-	if (p == 0)
-		return (1);
-	return (nb * ft_pow(nb, --p));
+	int i;
+	int j;
+	int	k;
+
+	k = 0;
+	i = 1;
+	while (i < nb_str)
+	{
+		j = 0;
+		while (tab[i][j])
+		{
+			k++;
+			j++;
+		}
+		i++;
+	}
+	return (k);
 }

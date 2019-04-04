@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pow.c                                           :+:      :+:    :+:   */
+/*   ft_list_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 18:24:23 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/04 18:44:10 by lzimmerm         ###   ########.fr       */
+/*   Created: 2019/04/04 18:30:41 by lzimmerm          #+#    #+#             */
+/*   Updated: 2019/04/04 18:35:42 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_pow(int nb, int p)
+int		ft_list_size(t_list *lst)
 {
-	if (p < 0)
-		return (0);
-	if (p == 0)
-		return (1);
-	return (nb * ft_pow(nb, --p));
+	int count;
+
+	count = 0;
+	while (lst)
+	{
+		count++;
+		lst = lst->next;
+	}
+	return (count);
 }

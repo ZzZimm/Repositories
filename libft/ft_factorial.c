@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pow.c                                           :+:      :+:    :+:   */
+/*   ft_factorial.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 18:24:23 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/04 18:44:10 by lzimmerm         ###   ########.fr       */
+/*   Created: 2019/04/04 18:24:49 by lzimmerm          #+#    #+#             */
+/*   Updated: 2019/04/04 18:45:39 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_pow(int nb, int p)
+int		ft_factorial(int nb)
 {
-	if (p < 0)
+	if (nb < 0 || nb > 12)
 		return (0);
-	if (p == 0)
+	if (nb == 0)
 		return (1);
-	return (nb * ft_pow(nb, --p));
+	return (nb * ft_factorial(nb - 1));
 }
