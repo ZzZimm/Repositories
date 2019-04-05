@@ -22,20 +22,27 @@ char		*ft_strtrimc(char *s, int c)
 {
 	int i;
 
-	i = -1;
-	while (s[++i])
-		if (s[i] == c && !(s[i] = '\0'))
+	i = 0;
+	if (c == '\0')
+		return (s);
+	while (s[i])
+	{
+		if (s[i] == c)
+		{
+			s[i] = '\0';
 			return (s);
+		}
+		i++;
+	}
 	return (s);
 }
 
-static void	return_line(size_t pos, t_list **lst, char **line)
+static void	return_line(int pos, t_list **lst, char **line)
 {
 	char *tmp;
 
-	*line = ft_strtrimc(ft_strdup((*lst)->content), '\n'); // a optimiser avec ft_strndup.c
+	*line = ft_strtrimc(ft_strdup((*lst)->content), '\n');
 	tmp = ft_strsub((*lst)->content, pos + 1, (*lst)->content_size - (pos + 1));
-	tmp[(*lst)->content_size - (pos + 1)] = '\0';
 	free((*lst)->content);
 	(*lst)->content = tmp;
 	(*lst)->content_size = (*lst)->content_size - (pos + 1);
@@ -63,7 +70,7 @@ static void	ft_lstread(int fd, t_list **lst, char **line)
 		return (return_line(res - (*lst)->content, lst, line));
 	if ((*lst)->content_size)
 	{
-		*line = ft_strdup((*lst)->content);
+		*line = (*lst)->content;
 		(*lst)->content_size = 0;
 		return ;
 	}
@@ -92,7 +99,7 @@ int			get_next_line(int fd, char **line)
 
 	if (!line || fd < 0 || read(fd, NULL, 0) == -1)
 		return (-1);
-	if (!lst)
+	if (!&(lst->content))
 	{
 		ft_push_new_lst(fd, &lst);
 		ft_lstread(fd, &lst, line);
