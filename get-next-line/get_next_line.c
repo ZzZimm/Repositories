@@ -6,11 +6,11 @@
 /*   By: lzimmerm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:57:13 by lzimmerm          #+#    #+#             */
-/*   Updated: 2019/04/04 17:12:17 by lzimmerm         ###   ########.fr       */
+/*   Updated: 2019/04/05 09:50:32 by lzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/libft.h"
 #include "get_next_line.h"
 #include <sys/types.h>
 #include <sys/uio.h>
@@ -33,9 +33,8 @@ static void	return_line(size_t pos, t_list **lst, char **line)
 {
 	char *tmp;
 
-	*line = ft_strtrimc(ft_strdup((*lst)->content), '\n'); // a optimiser avec ft_strndup.c
+	*line = ft_strtrimc(ft_strdup((*lst)->content), '\n');
 	tmp = ft_strsub((*lst)->content, pos + 1, (*lst)->content_size - (pos + 1));
-	tmp[(*lst)->content_size - (pos + 1)] = '\0';
 	free((*lst)->content);
 	(*lst)->content = tmp;
 	(*lst)->content_size = (*lst)->content_size - (pos + 1);
